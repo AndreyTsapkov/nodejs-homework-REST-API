@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
-const handleSchemaSaveErrors = require("../middlewares");
+
+const { handleSchemaSaveErrors } = require("../middlewares");
 
 const userSchema = new Schema(
   {
@@ -17,6 +18,10 @@ const userSchema = new Schema(
       type: String,
       enum: ["starter", "pro", "business"],
       default: "starter",
+    },
+    avatarURL: {
+      type: String,
+      required: true,
     },
     token: {
       type: String,
