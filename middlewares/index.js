@@ -1,5 +1,5 @@
 const authenticate = require("./authenticate");
-const handleSchemaSaveErrors = require("./handleSchemaSaveErrors");
+const handleSchemaSaveErrors = require("../helpers/handleSchemaSaveErrors");
 const isValidId = require("./isValidId");
 const upload = require("./upload");
 
