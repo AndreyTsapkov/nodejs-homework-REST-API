@@ -22,15 +22,7 @@ const mail = {
   html: "Just wait a little, it`s almost over",
 };
 
-const sendMailbyNodemailer = (mail) => {
-  transport
-    .sendMail(mail)
-    .then(() => {
-      console.log("Email send success");
-    })
-    .catch((error) => console.log(error.message));
-};
-
-sendMailbyNodemailer(mail);
-
-module.exports = sendMailbyNodemailer;
+transport
+  .sendMail(mail)
+  .then(() => console.log("Email send success"))
+  .catch((error) => console.log(error.message));
