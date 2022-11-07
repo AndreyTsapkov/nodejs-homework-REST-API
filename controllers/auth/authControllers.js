@@ -6,7 +6,7 @@ const gravatar = require("gravatar");
 const jimp = require("jimp");
 
 const { User, schemas } = require("../../models/user");
-const RequestError = require("../../helpers/errors");
+const { RequestError } = require("../../helpers");
 
 const { SECRET_KEY } = process.env;
 
