@@ -1,5 +1,5 @@
-const { Contact, schemas } = require("../models/contact");
-const { RequestError } = require("../helpers/errors");
+const { Contact, schemas } = require("../../models/contact");
+const { RequestError } = require("../../helpers/errors");
 
 const listContacts = async (req, res) => {
   try {
