@@ -3,7 +3,14 @@ const { RequestError } = require("../helpers/errors");
 
 const listContacts = async (req, res) => {
   try {
-    const contactsList = await Contact.find({});
+    const { id: owner } = req.user;
+    const { page = 1, limit = 10, ...query } = req.query;
+    const skip = (page - 1) * limit;
+    const contactsList = await Contact.find(
+      { owner, ...query },
+      "-createdAt -updatedAt",
+      { skip, limit }
+    ).populate("owner", "name email");
     res.json(contactsList);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -28,12 +35,13 @@ const getContactById = async (req, res) => {
 };
 
 const addContact = async (req, res) => {
+  const { _id: owner } = req.user;
   const { error, value: contactData } = schemas.joiSchema.validate(req.body);
 
   if (error) return res.status(400).json({ message: error.details[0].message });
 
   try {
-    const newContact = await Contact.create(contactData);
+    const newContact = await Contact.create({ ...contactData, owner });
     res.status(201).json(newContact);
   } catch (error) {
     res.status(500).json({ message: error.message });
